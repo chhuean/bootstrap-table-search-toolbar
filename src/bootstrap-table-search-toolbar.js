@@ -65,7 +65,8 @@
     var BootstrapTable = $.fn.bootstrapTable.Constructor,
         initToolbar = BootstrapTable.prototype.initToolbar,
         onSearch = BootstrapTable.prototype.onSearch,
-        initServer = BootstrapTable.prototype.initServer;
+        initServer = BootstrapTable.prototype.initServer,
+        destroy = BootstrapTable.prototype.destroy;
 
     BootstrapTable.prototype.initToolbar = function () {
         var that = this;
@@ -204,4 +205,9 @@
             $.ajax(request);
         }
     }
+
+    BootstrapTable.prototype.destroy = function () {
+        $(this.options.searchToolbar).insertBefore(this.$container);
+        destroy.apply(this, Array.prototype.slice.apply(arguments));
+    };
 }(jQuery);
